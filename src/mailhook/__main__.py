@@ -22,10 +22,9 @@ for x in rich.progress.track(range(len(list_emlx)), "Loading all emlx files"):
             lines = f.read().strip().split("\n")
             lines = lines[1:]
             killstart = len(lines)-1
-            while killstart > 0 and not lines[killstart].startswith("<?xml version"):
+            while not lines[killstart].startswith("<?xml"):
                 killstart-=1
-            lines = lines[0:killstart]
+            lines = lines[:killstart]
             print(lines)
-            sys.exit(0)
         except:
             pass
