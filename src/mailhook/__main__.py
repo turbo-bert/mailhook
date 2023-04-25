@@ -17,4 +17,7 @@ list_emlx = subprocess.check_output('find %s -name "*.emlx" -print0' % CFG['dir'
 
 for x in rich.progress.track(range(len(list_emlx)), "Loading all emlx files"):
     with open(list_emlx[x], 'r') as f:
-        lines = f.read().strip().split("\n")
+        try:
+            lines = f.read().strip().split("\n")
+        except:
+            pass
