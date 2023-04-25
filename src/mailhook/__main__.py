@@ -2,6 +2,7 @@
 
 import os
 import configparser
+import rich.progress
 
 cp = configparser.ConfigParser()
 cp.read_string("[_]\n" + open(os.path.expanduser("~/.mailhookrc"), "r").read())
@@ -12,6 +13,7 @@ print(CFG)
 
 import subprocess
 
-list_emlx = subprocess.check_output('find %s -name "*.emlx" -print0' % CFG['dir'], shell=True, universal_newlines=True).split(chr(0))
+list_emlx = subprocess.check_output('find %s -name "*.emlx" -print0' % CFG['dir'], shell=True, universal_newlines=True).strip().split(chr(0))
 
-print(list_emlx)
+for x in rich.progress.track(range(len(list_emlx)), "Loading all emlx files"):
+    pass
